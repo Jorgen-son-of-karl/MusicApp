@@ -1,0 +1,33 @@
+﻿@page
+@model MusicApp.Pages.Albums.IndexModel
+@{
+    ViewData["Title"] = "Albums";
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(a => a.Albums[0].Name)</th>
+            <th>@Html.DisplayNameFor(a => a.Albums[0].ReleaseYear)</th>
+            <th>@Html.DisplayNameFor(a => a.Albums[0].AverageRating)</th>
+            <th>@Html.DisplayNameFor(a => a.Albums[0].Band.Name)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var album in Model.Albums)
+        {
+        <tr>
+            <td>@album.Name</td>
+            <td>@album.ReleaseYear</td>
+            <td>@album.AverageRating</td>
+            <td>@album.Band.Name</td>
+
+            <td>
+                <a asp-page="./Details" asp-route-id="@album.ID">Details</a> |
+                <a asp-page="./Edit" asp-route-id="@album.ID">Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@album.ID">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
