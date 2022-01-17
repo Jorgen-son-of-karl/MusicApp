@@ -18,7 +18,12 @@
         </tr>
         <tr>
             <th><label asp-for="Band">@Html.DisplayNameFor(a => a.Band)</label></th>
-            @*<td><select name="bandId" asp-items="@(new SelectList(Model))"></select></td>*@
+            <td><select name="bandlist">
+@*                @foreach(var band in Model.BandList)
+            {
+
+            }
+                </select></td>*@
             <td><span asp-validation-for="Band"></span></td>
         </tr>
     </tbody>

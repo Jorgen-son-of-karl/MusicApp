@@ -896,3 +896,4 @@ C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\MusicApp.dll
 C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\ref\MusicApp.dll
 C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\MusicApp.pdb
 C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\MusicApp.genruntimeconfig.cache
+C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Albums\_EditForm.cshtml.g.cs

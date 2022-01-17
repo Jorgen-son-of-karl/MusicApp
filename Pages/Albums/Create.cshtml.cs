@@ -14,34 +14,26 @@ namespace MusicApp.Pages.Albums
     {
         private readonly ApplicationDbContext database;
 
+
         public CreateModel(ApplicationDbContext database)
         {
             this.database = database;
 
         }
-
+        [BindProperty]
+        public string SelectedBand { get; set; }
+        [BindProperty]
         public Album Album { get; set; }
+        public List<string> BandNames { get; set; }
 
-        private void CreateEmptyAlbum()
+        public async Task OnGetAsync()
         {
-            Album = new Album
-            {
-
-            };
-        }
-
-        public IEnumerable<Band> DisplayData { get; set; }
-
-        public async Task OnGet()
-        {
-            CreateEmptyAlbum();
-
-            DisplayData = await database.Band.ToListAsync();
+            BandNames = await database.Band.Select(b => b.Name).ToListAsync();
         }
 
         public async Task<IActionResult> OnPostAsync(Album album)
         {
-            CreateEmptyAlbum();
+            Band band = database.Band.Where(b => b.Name == SelectedBand).First();
 
             if (!ModelState.IsValid)
             {
@@ -50,7 +42,7 @@ namespace MusicApp.Pages.Albums
 
             Album.Name = album.Name;
             Album.ReleaseYear = album.ReleaseYear;
-            Album.Band = album.Band;
+            Album.Band = band;
 
             await database.Album.AddAsync(Album);
             await database.SaveChangesAsync();
