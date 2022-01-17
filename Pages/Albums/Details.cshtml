@@ -1,4 +1,22 @@
-﻿@page
+﻿@page "{id:int}"
 @model MusicApp.Pages.Albums.DetailsModel
+
 @{
+    ViewData["Title"] = "Details";
 }
+
+<h1>@ViewData["Title"]</h1>
+
+<h2>Contact</h2>
+
+<dl>
+    <dt>@Html.DisplayNameFor(m => m.Album.Name)</dt>
+    <dd>@Model.Album.Name</dd>
+    <dt>@Html.DisplayNameFor(m => m.Album.ReleaseYear)</dt>
+    <dd>@Model.Album.ReleaseYear</dd>
+    <dt>@Html.DisplayNameFor(m => m.Album.Band)</dt>
+    <dd>@Model.Album.Band</dd>
+
+</dl>
+
+<a asp-page="./Index">Back to List</a>
