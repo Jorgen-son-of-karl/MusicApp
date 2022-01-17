@@ -1,11 +1,16 @@
 ﻿@page
 @model MusicApp.Pages.Albums.CreateModel
 @{
+    ViewData["Title"] = "Create Album";
 }
 
-
-<h1>Add an Album</h1>
+<h1>@ViewData["Title"]</h1>
 
 <form method="post">
-    <input name="Name"/>
+    <partial name="_EditForm" for="Album" />
+    <button type="submit">Create Album</button>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

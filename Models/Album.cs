@@ -13,8 +13,6 @@ namespace MusicApp.Models
         public string Name { get; set; }
         [Display(Name = "Release year")]
         public int ReleaseYear { get; set; }
-        public List<Song> Songs { get; set; }
-        public List<Musician> Musicians { get; set; }
         public List<Review> Reviews { get; set; }
         [Display(Name = "Average score")]
         public int? AverageRating { get; set; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MusicApp.Data;
 using MusicApp.Models;
@@ -23,15 +24,33 @@ namespace MusicApp.Pages.Albums
         // Note that the variable name controls the "name" attributes in the HTML form.
         public Album Album { get; set; }
 
+        [BindProperty]
+        public Band Band { get; set; }
+
+        public SelectList Options { get; set; }
+
         // We need to load a Contact, including its PhoneNumbers, in both GET and POST, so we have a shared method for it.
         private async Task LoadAlbum(int id)
         {
             Album = await database.Album.Include(a => a.Band).SingleAsync(c => c.ID == id);
         }
 
+        //public IEnumerable<Band> DisplayData { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             await LoadAlbum(id);
+
+            //Options = new SelectList(database.Band, nameof(Band.ID), nameof(Band.Name));
+
+            //Options = database.Band.Select(b =>
+            //                      new SelectListIte
+            //                      {
+            //                          Value = Convert.ToString(b.ID),
+            //                          Text = b.Name
+            //                      }).ToList();
+
+            //DisplayData = await database.Band.ToListAsync();
 
             return Page();
         }

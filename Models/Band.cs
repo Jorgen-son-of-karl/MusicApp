@@ -18,6 +18,7 @@ namespace MusicApp.Models
         [Display(Name = "Average rating")]
         public int? AverageRating { get; set; }
         [Display(Name = "Albums")]
+        public List<Musician> Musicians { get; set; }
         public List<Album> Albums { get; set; }
     }
 }

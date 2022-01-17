@@ -18,6 +18,5 @@ namespace MusicApp.Data
         public DbSet<Band> Band { get; set; }
         public DbSet<Musician> Musician { get; set; }
         public DbSet<Review> Review { get; set; }
-        public DbSet<Song> Song { get; set; }
     }
 }
