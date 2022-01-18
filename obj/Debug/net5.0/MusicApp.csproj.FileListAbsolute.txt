@@ -902,3 +902,4 @@ C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Mus
 C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Musicians\Delete.cshtml.g.cs
 C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Musicians\Create.cshtml.g.cs
 C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Musicians\Edit.cshtml.g.cs
+C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Reviews\Delete.cshtml.g.cs
