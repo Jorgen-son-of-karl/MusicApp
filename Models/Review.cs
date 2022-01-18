@@ -12,5 +12,6 @@ namespace MusicApp.Models
         public string Content { get; set; }
         public IdentityUser User { get; set; }
         public int Rating { get; set; }
+        public Album Album { get; set; }
     }
 }

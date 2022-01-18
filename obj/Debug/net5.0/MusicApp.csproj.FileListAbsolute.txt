@@ -896,5 +896,9 @@ C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\MusicApp.dll
 C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\ref\MusicApp.dll
 C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\MusicApp.pdb
 C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\MusicApp.genruntimeconfig.cache
-C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Albums\_EditForm.cshtml.g.cs
 C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\Razor\Pages\Albums\_EditForm.cshtml.g.cs
+C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Musicians\Index.cshtml.g.cs
+C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Musicians\Details.cshtml.g.cs
+C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Musicians\Delete.cshtml.g.cs
+C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Musicians\Create.cshtml.g.cs
+C:\Users\Jörgen\source\repos\MusicApp\MusicApp\obj\Debug\net5.0\Razor\Pages\Musicians\Edit.cshtml.g.cs

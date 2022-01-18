@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MusicApp.Data;
+using MusicApp.Models;
 
 namespace MusicApp.Pages.Bands
 {
@@ -16,10 +17,10 @@ namespace MusicApp.Pages.Bands
         {
             this.database = database;
         }
-
+        public Band Band { get; set; }
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var contact = await database.Band.FindAsync(id);
+            Band = await database.Band.FindAsync(id);
 
             return Page();
         }
@@ -27,8 +28,6 @@ namespace MusicApp.Pages.Bands
         public async Task<IActionResult> OnPostAsync(int id)
         {
             var band = await database.Band.FindAsync(id);
-
-            // Check that the contact actually belongs to the logged-in user.
 
 
             database.Band.Remove(band);

@@ -7,16 +7,34 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<h2>Contact</h2>
+<h2>@Model.Album.Name</h2>
 
 <dl>
-    <dt>@Html.DisplayNameFor(m => m.Album.Name)</dt>
-    <dd>@Model.Album.Name</dd>
     <dt>@Html.DisplayNameFor(m => m.Album.ReleaseYear)</dt>
     <dd>@Model.Album.ReleaseYear</dd>
     <dt>@Html.DisplayNameFor(m => m.Album.Band)</dt>
-    <dd>@Model.Album.Band</dd>
-
+    <dd>@Model.Album.Band.Name</dd>
 </dl>
 
+@foreach (var review in Model.ReviewList)
+{
+    <div class="review-box">
+        <p>@review.Content</p>
+        <p>@review.Rating</p>
+    </div>
+}
+
+<form method="post">
+    <select name="RatingScore">
+        Rating
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <Label for="AlbumReview">Review this album</Label>
+<textarea id="AlbumReview" name="AlbumReview"></textarea>
+    <button type="submit">Post Review</button>
+</form>
 <a asp-page="./Index">Back to List</a>

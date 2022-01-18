@@ -276,7 +276,7 @@ namespace MusicApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AlbumID")
+                    b.Property<int?>("BandID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("BirthDay")
@@ -290,7 +290,7 @@ namespace MusicApp.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AlbumID");
+                    b.HasIndex("BandID");
 
                     b.ToTable("Musician");
                 });
@@ -321,26 +321,6 @@ namespace MusicApp.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Review");
-                });
-
-            modelBuilder.Entity("MusicApp.Models.Song", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AlbumID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AlbumID");
-
-                    b.ToTable("Song");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -405,9 +385,11 @@ namespace MusicApp.Data.Migrations
 
             modelBuilder.Entity("MusicApp.Models.Musician", b =>
                 {
-                    b.HasOne("MusicApp.Models.Album", null)
+                    b.HasOne("MusicApp.Models.Band", "Band")
                         .WithMany("Musicians")
-                        .HasForeignKey("AlbumID");
+                        .HasForeignKey("BandID");
+
+                    b.Navigation("Band");
                 });
 
             modelBuilder.Entity("MusicApp.Models.Review", b =>
@@ -423,25 +405,16 @@ namespace MusicApp.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MusicApp.Models.Song", b =>
-                {
-                    b.HasOne("MusicApp.Models.Album", null)
-                        .WithMany("Songs")
-                        .HasForeignKey("AlbumID");
-                });
-
             modelBuilder.Entity("MusicApp.Models.Album", b =>
                 {
-                    b.Navigation("Musicians");
-
                     b.Navigation("Reviews");
-
-                    b.Navigation("Songs");
                 });
 
             modelBuilder.Entity("MusicApp.Models.Band", b =>
                 {
                     b.Navigation("Albums");
+
+                    b.Navigation("Musicians");
                 });
 #pragma warning restore 612, 618
         }

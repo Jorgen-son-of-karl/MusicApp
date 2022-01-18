@@ -20,20 +20,23 @@ namespace MusicApp.Pages.Albums
             this.database = database;
         }
 
-
+        [BindProperty]
+        public string SelectedBand { get; set; }
         public Album Album { get; set; }
 
-        public List<string> BandList { get; set; }
+        public List<string> BandNames { get; set; }
 
         private async Task LoadAlbum(int id)
         {
-            Album = await database.Album.Include(a => a.Band).SingleAsync(c => c.ID == id);
+            Album = await database.Album.Include(a => a.Band).SingleAsync(m => m.ID == id);
+
         }
 
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
             await LoadAlbum(id);
+            BandNames = await database.Band.Select(b => b.Name).ToListAsync();
 
 
             return Page();
@@ -44,6 +47,7 @@ namespace MusicApp.Pages.Albums
         // Note that the variable names (Contact/contact) need to match because they are both connected to the "name" attributes in the HTML form, although uppercase/lowercase differences don't matter.
         public async Task<IActionResult> OnPostAsync(int id, Album album)
         {
+            Band band = database.Band.Where(b => b.Name == SelectedBand).First();
             await LoadAlbum(id);
 
             if (!ModelState.IsValid)
@@ -56,6 +60,7 @@ namespace MusicApp.Pages.Albums
             // Note that this is the step that ensures the user cannot set the FreeCalls variable.
             Album.Name = album.Name;
             Album.ReleaseYear = Album.ReleaseYear;
+            Album.Band = band;
 
             await database.SaveChangesAsync();
             return RedirectToPage("./Index");
