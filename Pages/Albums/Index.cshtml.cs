@@ -19,10 +19,10 @@ namespace MusicApp.Pages.Albums
         {
             this.database = database;
         }
-        private const string nameColumn = "Title (A-Z)";
-        private const string releaseYearColumn = "Release Year";
-        private const string scoreColumn = "Rating";
-        private string[] sortColumns = { nameColumn, releaseYearColumn, scoreColumn };
+        private const string NameColumn = "Title (A-Z)";
+        private const string ReleaseYearColumn = "Release Year";
+        private const string ScoreColumn = "Rating";
+        private readonly string[] SortColumns = { NameColumn, ReleaseYearColumn, ScoreColumn };
         [FromQuery]
         public string SortColumn { get; set; }
         public SelectList SortColumnList { get; set; }
@@ -32,35 +32,35 @@ namespace MusicApp.Pages.Albums
 
         public async Task OnGetAsync()
         {
-            SortColumnList = new SelectList(sortColumns);
+            SortColumnList = new SelectList(SortColumns);
 
-            Albums = await database.Album.Include(a => a.Band).ToListAsync();
+            var query = database.Album.Include(a => a.Band).AsNoTracking();
 
-            if (SearchTerm != null)
+                        if (SearchTerm != null)
+                        {
+                            query = query.Where(a =>
+                                a.Name.ToLower().Contains(SearchTerm.ToLower()) ||
+                                a.Band.Name.ToLower().Contains(SearchTerm.ToLower())
+                            );
+                        }
+
+            if (SortColumn != null)
             {
-                Albums = Albums.Where(a =>
-                    a.Name.ToLower().Contains(SearchTerm.ToLower()) ||
-                    a.Band.Name.ToLower().Contains(SearchTerm.ToLower())
-                );
+                if (SortColumn == NameColumn)
+                {
+                    query = query.OrderBy(c => c.Name);
+                }
+                else if (SortColumn == ReleaseYearColumn)
+                {
+                    query = query.OrderBy(c => c.ReleaseYear);
+                }
+                else if (SortColumn == ScoreColumn)
+                {
+                    query = query.OrderByDescending(c => c.AverageRating);
+                }
             }
 
-/*            if (SortColumn != null)
-            {
-                if (SortColumn == firstNameColumn)
-                {
-                    query = query.OrderBy(c => c.FirstName);
-                }
-                else if (SortColumn == lastNameColumn)
-                {
-                    query = query.OrderBy(c => c.LastName);
-                }
-                else if (SortColumn == emailColumn)
-                {
-                    query = query.OrderBy(c => c.EmailAddress);
-                }
-            }
-
-            Contacts = await query.ToListAsync();*/
+            Albums = await query.ToListAsync();
         
         }
     }

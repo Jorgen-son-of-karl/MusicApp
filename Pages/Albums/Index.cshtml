@@ -41,7 +41,14 @@
         <tr>
             <td><a asp-page="./Details" asp-route-id="@album.ID">@album.Name</a></td>
             <td>@album.ReleaseYear</td>
-            <td>@album.AverageRating</td>
+            @if (album.AverageRating == null || album.AverageRating == 0)
+            {
+                <td>This album does not yet have a rating</td>
+            }
+            else
+            {
+                <td>@album.AverageRating</td>
+            }
             <td>@album.Band.Name</td>
 
             <td>

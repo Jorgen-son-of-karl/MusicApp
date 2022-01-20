@@ -22,9 +22,13 @@
 {
 <div class="review-box">
     <p>@review.Content</p>
-    <p>@review.Rating</p> 
-    <a id="@review.ID" href="/Reviews/Delete/@review.ID">Delete</a>
-    <a href="/Reviews/Edit/@review.ID">Edit</a>
+    <p>@review.Rating</p>
+    @if((review.User.Id == Model.accessControl.LoggedInUserID))
+    {
+        <a id="@review.ID" href="/Reviews/Delete/@review.ID">Delete</a>
+        <a href="/Reviews/Edit/@review.ID">Edit</a>
+    }
+
 </div>
 }
 

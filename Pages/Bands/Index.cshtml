@@ -6,6 +6,27 @@
 }
 
 <a asp-page="./Create">Add a Band</a>
+
+<form method="get">
+    <table>
+        <tbody>
+            <tr>
+                <th><label for="SearchTerm">Search</label></th>
+                <td><input type="search" name="SearchTerm" id="SearchTerm" value="@Model.SearchTerm"></td>
+            </tr>
+            <tr>
+                <th><label for="SortColumn">Sort by</label></th>
+                <td>
+                    <select asp-for="SortColumn" asp-items="Model.SortColumnList">
+                        <option></option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Search</button>
+</form>
+
 <table class="band-table">
     <thead>
         <tr>
@@ -14,9 +35,6 @@
             <th>@Html.DisplayNameFor(b => b.Bands[0].YearFormed)</th>
             <th>@Html.DisplayNameFor(b => b.Bands[0].AverageRating)</th>
             <th>@Html.DisplayNameFor(b => b.Bands[0].Albums)</th>
-
-
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -26,7 +44,15 @@
                 <td><a asp-page="./Details" asp-route-id="@band.ID">@band.Name</a></td>
                 <td>@band.Genre</td>
                 <td>@band.YearFormed</td>
-                <td>@band.AverageRating</td>
+                @if(band.AverageRating == 0 || band.AverageRating == null)
+                {
+                    <td>This band does not yet have a rating</td>
+                }
+                else
+                {
+                    <td>@band.AverageRating</td>
+                }
+                @*TODO: eventuellt länka albums till details*@
                 <td>
                     @foreach (var album in band.Albums)
                     {
