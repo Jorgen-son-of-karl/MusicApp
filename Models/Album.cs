@@ -20,7 +20,6 @@ namespace MusicApp.Models
         [Display(Name = "Average score")]
         public double? AverageRating { get; set; }
         [Display(Name = "Band")]
-/*        [Required]*/
         public Band Band { get; set; }
     }
 }
