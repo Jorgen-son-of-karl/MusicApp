@@ -7,11 +7,9 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<h2>Contact</h2>
+<h2>@Model.Band.Name</h2>
 
 <dl>
-    <dt>@Html.DisplayNameFor(m => m.Band.Name)</dt>
-    <dd>@Model.Band.Name</dd>
     <dt>@Html.DisplayNameFor(m => m.Band.Genre)</dt>
     <dd>@Model.Band.Genre</dd>
     <dt>@Html.DisplayNameFor(m => m.Band.YearFormed)</dt>

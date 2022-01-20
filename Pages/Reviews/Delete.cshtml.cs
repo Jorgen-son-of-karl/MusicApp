@@ -13,10 +13,12 @@ namespace MusicApp.Pages.Reviews
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext database;
+        public readonly AccessControl accessControl;
 
-        public DeleteModel(ApplicationDbContext database)
+        public DeleteModel(ApplicationDbContext database, AccessControl accessControl)
         {
             this.database = database;
+            this.accessControl = accessControl;
         }
         public Review Review{ get; set; }
         public Album Album { get; set; }
@@ -25,7 +27,12 @@ namespace MusicApp.Pages.Reviews
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+
             Review = await database.Review.Include(r => r.Album).SingleOrDefaultAsync(r => r.ID == id);
+            if (!accessControl.UserCanAccess(Review))
+            {
+                return Forbid();
+            }
             if (Review == null)
             {
                 return NotFound();
@@ -38,6 +45,11 @@ namespace MusicApp.Pages.Reviews
         {
             Review = await database.Review.Include(r => r.Album).SingleOrDefaultAsync(r => r.ID == id);
             Album = Review.Album;
+
+            if (!accessControl.UserCanAccess(Review))
+            {
+                return Forbid();
+            }
 
             database.Review.Remove(Review);
             await database.SaveChangesAsync();

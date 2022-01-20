@@ -33,16 +33,19 @@ namespace MusicApp.Pages.Albums
 
         public async Task<IActionResult> OnPostAsync(Album album)
         {
+            BandNames = await database.Band.Select(b => b.Name).ToListAsync();
             Band band = database.Band.Where(b => b.Name == SelectedBand).First();
+
+
+ 
+            Album.Name = album.Name;
+            Album.ReleaseYear = album.ReleaseYear;
+            Album.Band = band;
 
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            Album.Name = album.Name;
-            Album.ReleaseYear = album.ReleaseYear;
-            Album.Band = band;
 
             await database.Album.AddAsync(Album);
             await database.SaveChangesAsync();

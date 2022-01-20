@@ -10,8 +10,10 @@ namespace MusicApp.Models
     {
         public int ID { get; set; }
         [Display(Name = "Name")]
+        [Required]
         public string Name { get; set; }
         [Display(Name = "Genre")]
+        [Required]
         public string Genre { get; set; }
         [Display(Name = "Formed in")]
         public int YearFormed { get; set; }
