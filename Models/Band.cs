@@ -16,7 +16,7 @@ namespace MusicApp.Models
         [Display(Name = "Formed in")]
         public int YearFormed { get; set; }
         [Display(Name = "Average rating")]
-        public int? AverageRating { get; set; }
+        public double? AverageRating { get; set; }
         [Display(Name = "Albums")]
         public List<Musician> Musicians { get; set; }
         public List<Album> Albums { get; set; }

@@ -14,6 +14,8 @@
     <dd>@Model.Album.ReleaseYear</dd>
     <dt>@Html.DisplayNameFor(m => m.Album.Band)</dt>
     <dd>@Model.Album.Band.Name</dd>
+    <dt>@Html.DisplayNameFor(m => m.Album.AverageRating)</dt>
+    <dd>@Model.Album.Band.AverageRating</dd>
 </dl>
 
 @foreach (var review in Model.ReviewList)
@@ -22,6 +24,7 @@
     <p>@review.Content</p>
     <p>@review.Rating</p> 
     <a id="@review.ID" href="/Reviews/Delete/@review.ID">Delete</a>
+    <a href="/Reviews/Edit/@review.ID">Edit</a>
 </div>
 }
 

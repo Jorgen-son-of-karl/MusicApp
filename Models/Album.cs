@@ -16,7 +16,7 @@ namespace MusicApp.Models
         public int ReleaseYear { get; set; }
         public List<Review> Reviews { get; set; }
         [Display(Name = "Average score")]
-        public int? AverageRating { get; set; }
+        public double? AverageRating { get; set; }
         [Display(Name = "Band")]
         public Band Band { get; set; }
     }

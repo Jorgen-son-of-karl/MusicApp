@@ -25,6 +25,7 @@ namespace MusicApp.Pages.Albums
         public Album Album { get; set; }
         public IList<Review> ReviewList { get; set; }
         public Review Review { get; set; }
+        public double TotalRating { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -41,11 +42,8 @@ namespace MusicApp.Pages.Albums
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
+
             Album = await database.Album.Include(a => a.Band).FirstOrDefaultAsync(a => a.ID == id);
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             Review review = new Review
             {
@@ -54,8 +52,22 @@ namespace MusicApp.Pages.Albums
                 Album = Album
             };
 
-
+            //we add the review here and update the database in order for the data to be displayed correctly
             await database.Review.AddAsync(review);
+            await database.SaveChangesAsync();
+            ReviewList = await database.Review.Where(r => r.Album == Album).ToListAsync();
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+
+            foreach (var reviewItem in ReviewList)
+            {
+                TotalRating += reviewItem.Rating;
+            }
+            review.Album.AverageRating = Math.Round(TotalRating / ReviewList.Count, 1);
+            //after the averageRating has been calculate we update the database again
             await database.SaveChangesAsync();
             return RedirectToPage("./Details", new { id = Album.ID });
         }
