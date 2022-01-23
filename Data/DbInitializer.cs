@@ -12,14 +12,15 @@ namespace MusicApp.Data
     {
         public static async Task InitializeAsync(ApplicationDbContext database, UserManager<IdentityUser> userManager)
         {
-            //if (database.Band.Any() /*|| database.Album.Any() || database.Musician.Any() || database.Review.Any() || database.Users.Any()*/)
-            //{
-            //    return;
-            //}
+            if (database.Band.Any() || database.Album.Any() || database.Musician.Any() || database.Review.Any() || database.Users.Any())
+            {
+                return;
+            }
 
             string bandsPath = @"Data/Bands.csv";
             string albumsPath = @"Data/Albums.csv";
             string musiciansPath = @"Data/Musicians.csv";
+            string reviewsPath = @"Data/Reviews.csv";
 
             // If Bands.csv does not exist or has issues being read
             if (!File.Exists(bandsPath))
@@ -127,7 +128,37 @@ namespace MusicApp.Data
                 }
             }
 
-            
+            database.SaveChanges();
+
+            // If Reviews.csv does not exist or has issues being read
+            if (!File.Exists(reviewsPath))
+            {
+                return;
+            }
+
+            string[] reviewLines = File.ReadAllLines(reviewsPath);
+            foreach (string line in reviewLines)
+            {
+                try
+                {
+                    // First, split the line on commas (CSV means "comma-separated values").
+                    string[] parts = line.Split(',');
+
+                    // Then create a product with its values set to the different parts of the line.
+                    Review r = new Review
+                    {
+                        Content = parts[0],
+                        Rating = int.Parse(parts[1]),
+                        Album = (Album)database.Album.Where(a => a.Name == parts[2]).First(),
+                        User = database.Users.Where(u => u.Email == parts[3]).First()
+                    };
+                    database.Review.Add(r);
+                }
+                catch
+                {
+                    return;
+                }
+            }
 
             database.SaveChanges();
         }

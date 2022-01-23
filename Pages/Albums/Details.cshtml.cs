@@ -57,14 +57,6 @@ namespace MusicApp.Pages.Albums
             {
                 return NotFound();
             }
-/*
-            foreach (var reviewItem in ReviewList)
-            {
-                TotalRating += reviewItem.Rating;
-            }
-            Album.AverageRating = Math.Round(TotalRating / ReviewList.Count, 1);*/
-            //after the averageRating has been calculate we update the database again
-/*            await database.SaveChangesAsync();*/
 
             return Page();
         }

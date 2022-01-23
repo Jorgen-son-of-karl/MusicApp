@@ -41,7 +41,7 @@
         <tr>
             <td><a asp-page="./Details" asp-route-id="@album.ID">@album.Name</a></td>
             <td>@album.ReleaseYear</td>
-            @if (album.AverageRating == null || album.AverageRating == 0)
+            @if (album.AverageRating == null || album.AverageRating == 0 || double.IsNaN((double)album.AverageRating))
             {
                 <td>This album does not yet have a rating</td>
             }

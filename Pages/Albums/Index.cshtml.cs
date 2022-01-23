@@ -29,12 +29,16 @@ namespace MusicApp.Pages.Albums
         public IList<Album> Albums { get; set; }
         [FromQuery]
         public string SearchTerm { get; set; }
+        public Album Album { get; set; }
+        public IList<Review> ReviewList { get; set; }
+        public double TotalRating { get; set; }
 
         public async Task OnGetAsync()
         {
+
             SortColumnList = new SelectList(SortColumns);
 
-            var query = database.Album.Include(a => a.Band).AsNoTracking();
+            var query = database.Album.Include(a => a.Band).Include(a => a.Reviews).AsNoTracking();
 
                         if (SearchTerm != null)
                         {
@@ -61,7 +65,29 @@ namespace MusicApp.Pages.Albums
             }
 
             Albums = await query.ToListAsync();
-        
+
+
+            foreach (var album in Albums)
+            {
+                TotalRating = 0;
+                Album = album;
+                ReviewList = await database.Review.Where(r => r.Album == album).ToListAsync();
+                if (ReviewList.Count == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    foreach (var reviewItem in ReviewList)
+                    {
+                        TotalRating += reviewItem.Rating;
+                    }
+                    Album.AverageRating = Math.Round(TotalRating / ReviewList.Count, 1);
+                }
+            }
+            //after the averageRating has been calculate we update the database again
+            await database.SaveChangesAsync();
+
         }
     }
 }
