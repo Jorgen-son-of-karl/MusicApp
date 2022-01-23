@@ -29,6 +29,7 @@ namespace MusicApp.Pages.Reviews
         {
 
             Review = await database.Review.Include(r => r.Album).SingleOrDefaultAsync(r => r.ID == id);
+            //this is to make sure that the user cant access a reviews delete page, even from the address bar
             if (!accessControl.UserCanAccess(Review))
             {
                 return Forbid();
@@ -53,7 +54,7 @@ namespace MusicApp.Pages.Reviews
 
             database.Review.Remove(Review);
             await database.SaveChangesAsync();
-
+            //as soon as we do something that involves revies, we want to update the average rating
             ReviewList = await database.Review.Where(r => r.Album == Review.Album).ToListAsync();
             if(ReviewList.Count != 0)
             {

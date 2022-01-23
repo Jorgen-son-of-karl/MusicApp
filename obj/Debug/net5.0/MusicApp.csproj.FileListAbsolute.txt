@@ -911,3 +911,4 @@ C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\Razor\Pages\Musicia
 C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\Razor\Pages\Reviews\Delete.cshtml.g.cs
 C:\Users\Computer\Documents\GitHub\MusicApp\obj\Debug\net5.0\Razor\Pages\Reviews\Edit.cshtml.g.cs
 C:\Users\Computer\Documents\GitHub\MusicApp\bin\Debug\net5.0\Data\Reviews.csv
+C:\Users\Jörgen\source\repos\MusicApp\MusicApp\bin\Debug\net5.0\Data\Reviews.csv

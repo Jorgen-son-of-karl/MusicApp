@@ -41,10 +41,7 @@ namespace MusicApp.Pages.Albums
 
             return Page();
         }
-
-        // The "contact" parameter is the Contact submitted through the HTML form, while the "Contact" variable is the Contact in the database.
-        // In this method, we transfer the data we need from the "form contact" to the "database contact" and then save it.
-        // Note that the variable names (Contact/contact) need to match because they are both connected to the "name" attributes in the HTML form, although uppercase/lowercase differences don't matter.
+        //the album we chose to edit is accepted as a parameter
         public async Task<IActionResult> OnPostAsync(int id, Album album)
         {
             Band band = database.Band.Where(b => b.Name == SelectedBand).First();
@@ -56,8 +53,7 @@ namespace MusicApp.Pages.Albums
             }
 
 
-            // Transfer the properties from the insecure (user-provided) Contact object to the "real" Contact object, from the database.
-            // Note that this is the step that ensures the user cannot set the FreeCalls variable.
+            //these fields allways gets updated, however if the user didnt edit one of the fields its old values are saved
             Album.Name = album.Name;
             Album.ReleaseYear = Album.ReleaseYear;
             Album.Band = band;
