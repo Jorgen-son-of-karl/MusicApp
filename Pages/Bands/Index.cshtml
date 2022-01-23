@@ -5,7 +5,7 @@
     ViewData["Title"] = "Bands";
 }
 
-<a asp-page="./Create">Add a Band</a>
+
 
 <form method="get">
     <table>
@@ -27,7 +27,9 @@
     <button type="submit">Search</button>
 </form>
 
-<table class="band-table">
+<a id="add" asp-page="./Create">Add a Band</a>
+
+<table id="table">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(b => b.Bands[0].Name)</th>
@@ -60,7 +62,7 @@
                     }
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@band.ID">Edit</a> |
+                    <a asp-page="./Edit" asp-route-id="@band.ID">Edit</a>
                     <a asp-page="./Delete" asp-route-id="@band.ID">Delete</a>
                 </td>
 

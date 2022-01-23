@@ -4,8 +4,8 @@
     ViewData["Title"] = "Musician";
 }
 
-<a asp-page="./Create">Add a Musician</a>
-<table class="band-table">
+<a id="add" asp-page="./Create">Add a Musician</a>
+<table id="table">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(b => b.Musician[0].Name)</th>
@@ -27,7 +27,7 @@
                 <td>@musician.Country</td>
                 <td>@musician.Band.Name</td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@musician.ID">Edit</a> |
+                    <a asp-page="./Edit" asp-route-id="@musician.ID">Edit</a>
                     <a asp-page="./Delete" asp-route-id="@musician.ID">Delete</a>
                 </td>
 

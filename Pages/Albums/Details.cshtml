@@ -30,7 +30,7 @@
 {
 <div class="review-box">
     <p>@review.Content</p>
-    <p>@review.Rating</p>
+    <p>Score: @review.Rating</p>
     <p>Posted by: @review.User.UserName</p>
     @if((review.UserID == Model.accessControl.LoggedInUserID))
         {

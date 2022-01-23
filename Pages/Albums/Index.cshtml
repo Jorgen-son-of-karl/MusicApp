@@ -4,7 +4,7 @@
     ViewData["Title"] = "Albums";
 }
 
-<a asp-page="./Create">Add an Album</a>
+
 
 <form method="get">
     <table>
@@ -26,7 +26,9 @@
     <button type="submit">Search</button>
 </form>
 
-<table>
+<a id="add" asp-page="./Create">Add an Album</a>
+
+<table id="table">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(a => a.Albums[0].Name)</th>
@@ -52,7 +54,7 @@
             <td>@album.Band.Name</td>
 
             <td>
-                <a asp-page="./Edit" asp-route-id="@album.ID">Edit</a> |
+                <a asp-page="./Edit" asp-route-id="@album.ID">Edit</a>
                 <a asp-page="./Delete" asp-route-id="@album.ID">Delete</a>
             </td>
         </tr>
