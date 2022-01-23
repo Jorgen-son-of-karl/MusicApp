@@ -27,20 +27,17 @@ namespace MusicApp.Pages.Albums
         public List<string> BandNames { get; set; }
 
         public async Task OnGetAsync()
-        {
+        {   //variable to store all bands in order to pick one from a dropdownbox
             BandNames = await database.Band.Select(b => b.Name).ToListAsync();
         }
 
         public async Task<IActionResult> OnPostAsync(Album album)
-        {
-            BandNames = await database.Band.Select(b => b.Name).ToListAsync();
-            Band band = database.Band.Where(b => b.Name == SelectedBand).First();
-
-
- 
+        {            
+            //the name and releaseyear comes from our inputs
             Album.Name = album.Name;
             Album.ReleaseYear = album.ReleaseYear;
-            Album.Band = band;
+            //the band is set with the help of our dropdownbox, to minimalize  inputerrors
+            Album.Band = database.Band.Where(b => b.Name == SelectedBand).First();
 
             if (!ModelState.IsValid)
             {

@@ -36,6 +36,7 @@ namespace MusicApp.Pages.Bands
 
         public async Task<IActionResult> OnPostAsync(Band band)
         {
+            //we create an empty band and set its attributes with what we wrote in our form
             CreateEmptyBand();
 
             if (!ModelState.IsValid)

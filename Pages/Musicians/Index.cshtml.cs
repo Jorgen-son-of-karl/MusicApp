@@ -19,8 +19,6 @@ namespace MusicApp.Pages.Musicians
             this.database = database;
         }
         public IList<Musician> Musician { get; set; }
-/*        public Band Band { get; set; }
-        public IList<Album> Albums { get; set; }*/
         public async Task OnGetAsync()
         {
             Musician = await database.Musician.Include(m => m.Band).ToListAsync();

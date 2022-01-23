@@ -38,7 +38,6 @@ namespace MusicApp.Pages.Albums
         {
              var user = accessControl.LoggedInUserID;
 
-
             Album = await database.Album.Include(a => a.Band).FirstOrDefaultAsync(a => a.ID == id);
             ReviewList = await database.Review.Where(r => r.Album == Album).ToListAsync();
             UserList = await database.Users.ToListAsync();
@@ -86,7 +85,7 @@ namespace MusicApp.Pages.Albums
                 return Page();
             }
 
-
+            //once again a small calculation of the reviews of the album in ordet to get its average
             foreach (var reviewItem in ReviewList)
             {
                 TotalRating += reviewItem.Rating;
