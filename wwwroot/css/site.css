@@ -4,6 +4,7 @@ for details on configuring this project to bundle and minify static web assets. 
 #navbar {
     overflow: hidden;
     background-color: #333;
+    position: sticky;
 }
 
     /* Navbar links */
@@ -24,11 +25,20 @@ li{
     padding: 16px;
 }
 
+.log-nav{
+    float: right;
+
+}
+
+.log-nav, #navbar{
+    display: inline-flex;
+    flex: auto;
+}
 
 .sticky {
-    position: sticky;
+/*    position: sticky;
     top: 0;
-    width: 100%;
+    width: 100%;*/
 }
 
 
