@@ -22,5 +22,10 @@ namespace MusicApp.Models
         [Display(Name = "Albums")]
         public List<Musician> Musicians { get; set; }
         public List<Album> Albums { get; set; }
+
+        public static implicit operator Band(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

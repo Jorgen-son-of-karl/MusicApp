@@ -229,7 +229,7 @@ namespace MusicApp.Data.Migrations
                     b.Property<double?>("AverageRating")
                         .HasColumnType("float");
 
-                    b.Property<int>("BandID")
+                    b.Property<int?>("BandID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -325,7 +325,8 @@ namespace MusicApp.Data.Migrations
 
                     b.HasIndex("AlbumID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserID", "ID")
+                        .IsUnique();
 
                     b.ToTable("Review");
                 });
@@ -385,9 +386,7 @@ namespace MusicApp.Data.Migrations
                 {
                     b.HasOne("MusicApp.Models.Band", "Band")
                         .WithMany("Albums")
-                        .HasForeignKey("BandID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BandID");
 
                     b.Navigation("Band");
                 });
