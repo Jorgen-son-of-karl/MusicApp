@@ -33,6 +33,7 @@ namespace MusicApp.Pages.Musicians
 
         public async Task<IActionResult> OnPostAsync(Musician musician)
         {
+            BandNames = await database.Band.Select(b => b.Name).ToListAsync();
             Band band = database.Band.Where(b => b.Name == SelectedBand).First();
 
             if (!ModelState.IsValid)

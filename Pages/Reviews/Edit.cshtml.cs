@@ -29,19 +29,19 @@ namespace MusicApp.Pages.Reviews
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Review = await database.Review.SingleAsync(m => m.ID == id);
+            Review = await database.Review.Include(r => r.Album).SingleAsync(r => r.ID == id);
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int id, Review review)
         {
+            Review = await database.Review.Include(r => r.Album).SingleAsync(r => r.ID == id);
+            ReviewList = await database.Review.Where(r => r.Album == Review.Album).ToListAsync();
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            Review = await database.Review.Include(r => r.Album).SingleAsync(r => r.ID == id);
-            ReviewList = await database.Review.Where(r => r.Album == Review.Album).ToListAsync();
 
             if (RatingScore == 0)
             {

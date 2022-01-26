@@ -38,6 +38,7 @@ li{
 }
 
 #table {
+    margin: auto;
 }
     #table td {
         text-align: left;
@@ -88,6 +89,9 @@ li{
     * {
         font-size: 12px;
     }
+    #table {
+        margin: auto;
+    }
     #navbar a{
         padding: 10px;
     }
@@ -101,13 +105,17 @@ li{
         font-size: 10px;
     }
     #table a {
-        font-size: 10px;
-        margin-left: 5px;
+        
+        font-size: 0.8em;
+        margin-left: 2px;
+        padding: 0;
     }
     #navbar {
         
     }
     .log-nav {
+        display: flex;
+        flex-direction: column;
         margin-right: 20px;
     }
     #navbar a{

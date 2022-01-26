@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicApp.Data;
 
-namespace MusicApp.Data.Migrations
+namespace MusicApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220120083403_doubletrouble")]
-    partial class doubletrouble
+    [Migration("20220126111425_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -235,6 +235,7 @@ namespace MusicApp.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ReleaseYear")
@@ -258,9 +259,11 @@ namespace MusicApp.Data.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Genre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("YearFormed")
@@ -285,9 +288,11 @@ namespace MusicApp.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(57)
+                        .HasColumnType("nvarchar(57)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -313,14 +318,14 @@ namespace MusicApp.Data.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
                     b.HasIndex("AlbumID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Review");
                 });
@@ -402,7 +407,7 @@ namespace MusicApp.Data.Migrations
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserID");
 
                     b.Navigation("Album");
 

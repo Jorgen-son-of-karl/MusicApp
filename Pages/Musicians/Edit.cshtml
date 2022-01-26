@@ -20,6 +20,11 @@
                 <td><span asp-validation-for="Musician.BirthDay"></span></td>
             </tr>
             <tr>
+                <th><label asp-for="Musician.Country">@Html.DisplayNameFor(m => m.Musician.Country)</label></th>
+                <td><input asp-for="Musician.Country"></td>
+                <td><span asp-validation-for="Musician.Country"></span></td>
+            </tr>
+            <tr>
                 <th><label asp-for="Musician.Band">@Html.DisplayNameFor(m => m.Musician.Band)</label></th>
                 <td>
                     <select name="selectedBand">

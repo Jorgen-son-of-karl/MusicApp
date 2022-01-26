@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicApp.Data;
 
-namespace MusicApp.Data.Migrations
+namespace MusicApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220118085313_musicianChanges")]
-    partial class musicianChanges
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,13 +226,14 @@ namespace MusicApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AverageRating")
-                        .HasColumnType("int");
+                    b.Property<double?>("AverageRating")
+                        .HasColumnType("float");
 
                     b.Property<int?>("BandID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ReleaseYear")
@@ -254,13 +253,15 @@ namespace MusicApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AverageRating")
-                        .HasColumnType("int");
+                    b.Property<double?>("AverageRating")
+                        .HasColumnType("float");
 
                     b.Property<string>("Genre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("YearFormed")
@@ -285,9 +286,11 @@ namespace MusicApp.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(57)
+                        .HasColumnType("nvarchar(57)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -313,14 +316,14 @@ namespace MusicApp.Data.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
                     b.HasIndex("AlbumID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Review");
                 });
@@ -396,13 +399,15 @@ namespace MusicApp.Data.Migrations
 
             modelBuilder.Entity("MusicApp.Models.Review", b =>
                 {
-                    b.HasOne("MusicApp.Models.Album", null)
+                    b.HasOne("MusicApp.Models.Album", "Album")
                         .WithMany("Reviews")
                         .HasForeignKey("AlbumID");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("Album");
 
                     b.Navigation("User");
                 });

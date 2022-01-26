@@ -18,7 +18,6 @@ namespace MusicApp.Models
         [StringLength(57)]
         public string Country { get; set; }
         [Display(Name = "Band")]
-        [Required]
         public Band Band { get; set; }
 
     }
